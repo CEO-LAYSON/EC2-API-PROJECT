@@ -21,13 +21,6 @@ const pool = new Pool({
 
 app.use(cors());
 
-// Initial route
-app.get("/", (req, res) => {
-  res.send(
-    "Welcome to the UDOM API! Use /students or /subjects to fetch data."
-  );
-});
-
 // Endpoint 1: /students
 app.get("/students", async (req, res) => {
   try {
