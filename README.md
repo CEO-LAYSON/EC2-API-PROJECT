@@ -27,4 +27,4 @@ This project involves developing a simple API using a preferred programming lang
 
 3. run the project
    locally: node index.js
-   live: endpoint1(http://16.170.235.227:5001/subjects) && endpoint2(http://16.170.235.227:5001/students)
+   live: endpoint1(http://51.21.251.240:5005/subjects) && endpoint2(http://51.21.251.240:5005/students)
