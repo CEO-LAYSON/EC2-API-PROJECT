@@ -6,11 +6,22 @@ import cors from "cors";
 // Load environment variables
 dotenv.config();
 
+// Check required environment variables
+["PGUSER", "PGHOST", "PGDATABASE", "PGPASSWORD", "PGPORT"].forEach((key) => {
+  if (!process.env[key]) {
+    console.warn(`⚠️ Warning: ${key} is not defined in .env file`);
+  }
+});
+
 const { Pool } = pkg;
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5005;
 
-// Database connection
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// PostgreSQL connection pool
 const pool = new Pool({
   user: process.env.PGUSER,
   host: process.env.PGHOST,
@@ -19,9 +30,7 @@ const pool = new Pool({
   port: process.env.PGPORT,
 });
 
-app.use(cors());
-
-// Endpoint 1: /students
+// GET /students
 app.get("/students", async (req, res) => {
   try {
     const result = await pool.query("SELECT name, program FROM students");
@@ -31,7 +40,7 @@ app.get("/students", async (req, res) => {
   }
 });
 
-// Endpoint 2: /subjects
+// GET /subjects
 app.get("/subjects", async (req, res) => {
   try {
     const result = await pool.query(
@@ -43,6 +52,7 @@ app.get("/subjects", async (req, res) => {
   }
 });
 
+// Start server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`✅ Server is running on http://localhost:${port}`);
 });
