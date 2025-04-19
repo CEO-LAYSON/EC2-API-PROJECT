@@ -1,36 +1,115 @@
 # EC2-API-PROJECT
 
-## Project Overview
-This project involves developing a simple API using a preferred programming language and a relational database management system (RDBMS). The API is deployed on an AWS EC2 instance and provides endpoints for student information retrieval.
+## 📌 Project Overview
 
-## Features
-- **Endpoint 1: `/students`**
-  - Returns a JSON response containing a minimum of 10 students.
-  - Each student includes their **name** and **enrolled program**.
+This project is a RESTful API built using **Node.js (Express)**, designed to handle student data and subject scores. It is deployed on an **AWS EC2 Ubuntu instance** and integrates **Bash automation scripts** to ensure server health, backup operations, and smooth API updates. This was developed for my **CS421 Application Deployment and Management** assignment.
 
-- **Endpoint 2: `/students`**
-  - Returns JSON data for a specific student identified by their **ID**.
-  - Data includes **name**, **enrolled program**, and **scores** for each subject.
+---
 
-## Technologies Used
-- **Backend:** (Express Node.js)
-- **Version Control:** Git, GitHub
-- **Deployment:** AWS EC2, Nginx/Apache
+## 🚀 API Features
 
-## Setup & Installation
-1. **Clone the repository:**
-   git clone https://github.com/CEO-LAYSON/EC2-API-PROJECT.git
-   cd EC2-API-PROJECT
+### 🔹 Endpoint 1: `GET /students`
 
-2. Install dependencies (if applicable):
-   npm install  # For Node.js projects
+- Retrieves a list of **at least 10 students**.
+- Each entry includes:
+  - `name`
+  - `enrolled program`
 
-3. run the project
-   locally: node index.js
-   live: endpoint1(http://51.21.251.240:5005/subjects) && endpoint2(http://51.21.251.240:5005/students)
-## Understand Backup Schemes
+### 🔹 Endpoint 2: `GET /subjects`
 
-- Full Backup: Backs up the entire system. Easy to restore. Takes more space and time.
-- Incremental Backup: Only backs up what changed since the last backup. Saves space. Slower restore.
-- Differential Backup: Backs up everything changed since last full backup. Faster restore. Medium space.
+- Retrieves available subjects.
+- Each entry includes:
+  - `subject_name`
+  - `score`
 
+---
+
+## 🛠️ Technologies Used
+
+| Area              | Tools/Tech                      |
+| ----------------- | ------------------------------- |
+| Backend           | Node.js, Express                |
+| Database          | PostgreSQL                      |
+| Deployment        | AWS EC2 (Ubuntu), Nginx         |
+| Monitoring/Backup | Bash scripting, Cron, `pg_dump` |
+| Version Control   | Git, GitHub                     |
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/CEO-LAYSON/EC2-API-PROJECT.git
+cd EC2-API-PROJECT
+```
+
+### 2. Install API Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the API
+
+```bash
+node index.js  # For local testing
+```
+
+### 4. Access Live API Endpoints
+
+- `/students`: [http://51.21.251.240:5005/students](http://51.21.251.240:5005/students)
+- `/subjects`: [http://51.21.251.240:5005/subjects](http://51.21.251.240:5005/subjects)
+
+---
+
+## 📂 Bash Scripts for Server Management
+
+The following Bash scripts are used to automate important server tasks:
+
+| Script             | Purpose                                                                                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `health_check.sh`  | Monitors system health and the API's status, logging results to `/var/log/server_health.log`.                                                             |
+| `backup_api.sh`    | Creates backups of project files and the PostgreSQL database, stored in `/home/ubuntu/backups`. Old backups are automatically removed.                    |
+| `update_server.sh` | Updates the server with the latest security patches, pulls the latest repository changes, and restarts necessary services. Logs to `/var/log/update.log`. |
+
+### 🧪 Running the Scripts
+
+```bash
+chmod +x script_name.sh      # Grant executable permissions
+./script_name.sh             # Execute the script
+```
+
+---
+
+## ⏲️ Cron Job Configuration
+
+To ensure these scripts run at the correct intervals, the following cron jobs are set up:
+
+```cron
+# Run health check every 6 hours
+0 */6 * * * /home/ubuntu/health_check.sh
+
+# Run backup daily at 2 AM
+0 2 * * * /home/ubuntu/backup_api.sh
+
+# Run server update every 3 days at 3 AM
+0 3 */3 * * * /home/ubuntu/update_server.sh
+```
+
+---
+
+## 🧠 Backup Strategies
+
+The project implements the following backup types to ensure data integrity:
+
+| Type             | Description                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| **Full**         | Backups everything. ✅ Reliable recovery, ❌ Uses more storage.                              |
+| **Incremental**  | Backups only changes since the last backup. ✅ Efficient, ❌ Slower restore.                 |
+| **Differential** | Backups changes since the last full backup. ⚖️ Good balance between speed and recovery time. |
+
+---
+
+> **Author:** CEO-LAYSON | University of Dodoma | CS421 – Application Deployment and Management
