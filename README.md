@@ -13,14 +13,15 @@ This project is a RESTful API built using **Node.js (Express)**, designed to han
 - Retrieves a list of **at least 10 students**.
 - Each entry includes:
   - `name`
-  - `enrolled program`
+  - `program`
 
 ### 🔹 Endpoint 2: `GET /subjects`
 
 - Retrieves available subjects.
 - Each entry includes:
-  - `subject_name`
-  - `score`
+  - `name`
+  - `code`
+  - `year`
 
 ---
 
