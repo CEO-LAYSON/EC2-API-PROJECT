@@ -113,4 +113,12 @@ The project implements the following backup types to ensure data integrity:
 
 ---
 
+## 🧑‍💻 Dependencies
+
+curl (used by health_check.sh to check API endpoints)
+
+pg_dump (used by backup_api.sh to backup the PostgreSQL database)
+
+cron (used to schedule the scripts)
+
 > **Author:** CEO-LAYSON | University of Dodoma | CS421 – Application Deployment and Management
