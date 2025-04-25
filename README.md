@@ -119,8 +119,6 @@ The project implements the following backup types to ensure data integrity:
 - `pg_dump` (used by backup_api.sh to backup the PostgreSQL database)
 - `cron` (used to schedule the scripts)
 
-> **Author:** CEO-LAYSON | University of Dodoma | CS421 – Application Deployment and Management
-
 ---
 
 ## 📦 Docker Containerization
@@ -206,3 +204,5 @@ docker pull ceolayson/udom-api
 
 - `docker_ps.png`: Shows running containers using `docker ps`
 - `docker_logs.txt`: Contains output logs from your Docker containers
+
+> **Author:** CEO-LAYSON | University of Dodoma | CS421 – Application Deployment and Management
